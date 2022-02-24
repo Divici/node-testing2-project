@@ -33,4 +33,21 @@ describe("[GET] by id", ()=>{
         expect(res.body.id).toBe(2)
         expect(res.body.name).toBe("Tails")
     })
+
+    it("returns a 404 for missing character", async () => {
+		const res = await request(server).get("/api/characters/50")
+		expect(res.status).toBe(404)
+	})
+})
+
+describe("[POST] /characters/:id", ()=>{
+    it("creates a new character", async () => {
+		const res = await request(server)
+			.post("/api/characters")
+			.send({ name: "E-101", animal: 'robot' })
+		expect(res.status).toBe(201)
+		expect(res.type).toBe("application/json")
+		expect(res.body.name).toBe("E-101")
+		expect(res.body.id).toBeDefined()
+	})
 })
