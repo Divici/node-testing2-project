@@ -15,9 +15,9 @@ beforeEach(async ()=>{
     await db.seed.run()
 })
 
-// afterAll(async ()=>{
-//     await db.destroy()
-// })
+afterAll(async ()=>{
+    await db.destroy()
+})
 
 test("correct env var", ()=>{
     expect(process.env.DB_ENV).toBe("testing")
@@ -54,6 +54,9 @@ describe("Character Model functions", ()=>{
             expect(characters).toHaveLength(5)
         })
     })
+
+    
+    
 
     
 
